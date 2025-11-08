@@ -13,9 +13,10 @@ pillow
 psutil
 py-tgcalls
 pykeyboard
-pyrogramm==2.0.515
+pyrogramm==2.0.106
 python-dotenv
 pyyaml
+ntgcalls
 requests
 speedtest-cli
 spotipy
@@ -25,3 +26,13 @@ yt-dlp
 youtube-search
 youtube-search-python
 wget
+aiohttp~=3.13.1
+kurigram>=2.2.13
+pillow~=12.0.0
+psutil~=7.1.2
+pymongo>=4.15.3
+py-tgcalls~=2.2.8
+py-yt-search~=0.5
+python-dotenv~=1.1.1
+youtube-search-python
+yt-dlp[default]>=2025.10.31.222828.dev0
