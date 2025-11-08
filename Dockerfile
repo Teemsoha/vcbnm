@@ -1,15 +1,20 @@
-FROM python:3.11-buster
-ENV VIRTUAL_ENV=/opt/venv
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+FROM python:3.12-slim
+
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    ffmpeg \
+    git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
-ENV PIP_NO_CACHE_DIR=1 PYTHONUNBUFFERED=1 TZ=Asia/Kolkata
-RUN apt-get update && apt-get upgrade -y
-RUN python3 -m pip install -U pip
-RUN pip3 install -U wheel setuptools
-RUN apt install -y ffmpeg apt-utils build-essential python3-dev
+
+COPY requirements.txt ./ 
+
+RUN python3.12 -m pip install --upgrade pip && \
+    python3.12 -m pip install --no-cache-dir --prefer-binary -r requirements.txt
+
 COPY . .
-RUN pip3 install --no-cache-dir -U -r requirements.txt
-RUN apt update && apt autoremove -y
-RUN apt clean && rm -rf /var/lib/apt/lists/* ~/.thumbs/* ~/.cache
-CMD bash start 
+
+CMD ["bash", "start"]
